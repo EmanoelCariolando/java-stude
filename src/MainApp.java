@@ -3,13 +3,16 @@ import java.util.Locale;
 public class MainApp {
     public static void main(String[] args) {
 
-        double x = 10.554;
-        int y = 5;
-        double soma = x + y;
+        String name = "Maria";
+        int age = 25;
+        double wage  = 10.500;
 
-        System.out.printf("%.2f%n", soma);
+        System.out.printf("%s is %d years old and earns $ %.2f dollars %n" ,name,age,wage );
 
         Locale.setDefault(Locale.US);
+
+        // %s = String/Text , %d = Numbers/whole numbers ,
+        // %f = floating point numbers: %.2f and , %n = line break
 
 
 
