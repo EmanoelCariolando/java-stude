@@ -5,17 +5,18 @@ public class MainApp {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        String s1,s2,s3;
+        int s1;
 
-        s1 = sc.nextLine();
-        s2 = sc.nextLine();
-        s3 = sc.nextLine();
+        s1 = sc.nextInt();
 
-        System.out.println("Request:");
-        System.out.println(s1);
-        System.out.println(s2);
-        System.out.println(s3);
 
+          if (s1 < 12) {           // if you find this, stop, otherwise go to the next one until you find the real one
+             System.out.println("GOOD MORNING");
+        } else if ( s1 < 18) {
+             System.out.println("GOOD AFTERNOON");
+        } else {
+             System.out.println("GOOD NIGHT");
+        }
 
         sc.close();
 
