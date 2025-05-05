@@ -1,21 +1,23 @@
 import java.util.Locale;
+import java.util.Scanner;
 
 public class MainApp {
     public static void main(String[] args) {
 
-       int x = 5;
-       int y = 2;
-       double soma  = (double) x / y;
+        Scanner sc = new Scanner(System.in);
+        String s1,s2,s3;
 
-       System.out.println(soma);
+        s1 = sc.nextLine();
+        s2 = sc.nextLine();
+        s3 = sc.nextLine();
+
+        System.out.println("Request:");
+        System.out.println(s1);
+        System.out.println(s2);
+        System.out.println(s3);
 
 
-
-
-    //specification
-
-
-
+        sc.close();
 
 
     }
