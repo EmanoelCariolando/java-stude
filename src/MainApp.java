@@ -5,23 +5,19 @@ public class MainApp {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        int time;
+        int minutes;
+        double value = 50.0;
 
-        time = sc.nextInt();
+        minutes = sc.nextInt();
 
-
-          if (time < 12) {           // if you find this, stop, otherwise go to the next one until you find the real one
-             System.out.println("GOOD MORNING");
-        } else if ( time < 18) {
-             System.out.println("GOOD AFTERNOON");
-        } else {
-             if (time < 24) {
-                 System.out.println("GOOD NIGHT");
-             }
-             else {
-                 System.out.println("THIS IS NOT A HOUR");
-             }
+        if(minutes > 100){
+         value -= (minutes - 100) * 2;
+            System.out.printf("amount to pay: %.2f%n",value);
         }
+        else {
+            System.out.printf("amount to pay: %.2f%n",value);
+        }
+
 
         sc.close();
 
