@@ -5,18 +5,40 @@ public class MainApp {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        int minutes;
+        int x;
         double value = 50.0;
 
-        minutes = sc.nextInt();
+        x = sc.nextInt();
 
-        if(minutes > 100){
-         value -= (minutes - 100) * 2;
-            System.out.printf("amount to pay: %.2f%n",value);
+        switch (x){
+            case 1:
+            System.out.println("It's Sunday");
+            break;
+            case 2:
+                System.out.println("It's Monday");
+                break;
+            case 3:
+                System.out.println("It's Tuesday");
+                break;
+            case 4:
+                System.out.println("It's Wednesday");
+                break;
+            case 5:
+                System.out.println("It's Thursday");
+                break;
+            case 6:
+                System.out.println("It's Friday");
+                break;
+            case 7:
+                System.out.println("It's Saturday");
+                break;
+
+                default:
+                System.out.println("this day does not exist");
+                break;
         }
-        else {
-            System.out.printf("amount to pay: %.2f%n",value);
-        }
+
+
 
 
         sc.close();
