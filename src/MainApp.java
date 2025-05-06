@@ -1,3 +1,4 @@
+import java.awt.geom.Area;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -7,13 +8,19 @@ public class MainApp {
 
         Scanner sc = new Scanner(System.in);
 
-        double value = sc.nextDouble();
+        double width = sc.nextDouble();
+        double length = sc.nextDouble();
+        double squareMeter = sc.nextDouble();
 
-        double promotion = (value < 20.0) ? value - 0.5 : value - 1.5;
-        System.out.println(promotion);
+        double area = width * length;
+        double price = area * squareMeter;
 
+
+        System.out.printf("Area = %.2f%n", area);
+        System.out.printf("Price = %.2f%n", price);
 
         sc.close();
+
 
 
     }
