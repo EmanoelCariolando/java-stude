@@ -8,16 +8,16 @@ public class MainApp {
 
         Scanner sc = new Scanner(System.in);
 
-        double width = sc.nextDouble();
-        double length = sc.nextDouble();
-        double squareMeter = sc.nextDouble();
-
-        double area = width * length;
-        double price = area * squareMeter;
+        int x = sc.nextInt();
+        int soma = 0;
 
 
-        System.out.printf("Area = %.2f%n", area);
-        System.out.printf("Price = %.2f%n", price);
+        while(x != 0){
+            x = sc.nextInt();
+            soma += x;
+
+        }
+        System.out.println(soma);
 
         sc.close();
 
