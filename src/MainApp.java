@@ -8,15 +8,15 @@ public class MainApp {
 
         Scanner sc = new Scanner(System.in);
 
-        int x = sc.nextInt();
+        int n = sc.nextInt();
         int soma = 0;
 
-
-        while(x != 0){
-            x = sc.nextInt();
+        for(int i = 0; i < n; i++){
+            int x = sc.nextInt();
             soma += x;
 
         }
+
         System.out.println(soma);
 
         sc.close();
