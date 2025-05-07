@@ -8,19 +8,17 @@ public class MainApp {
 
         Scanner sc = new Scanner(System.in);
 
-        char v;
+        int n = sc.nextInt();
+        int mask = 0b00100000;
 
-        do{
-            System.out.println("Enter the temperature in Celsius:");
-            double c = sc.nextDouble();
+        if((n & mask) != 0){
+           System.out.print("the 6 bit is true");
+        } else {
+            System.out.print("the 6 bit is false");
+        }
 
-            double f = 9 * c / 5 + 32;
-            System.out.printf("fahrenheit equivalent :%.2f%n", f);
 
-            System.out.print("Do you want to repeat?(y/n)");
-             v = sc.next().charAt(0);
 
-        } while ( v != 'n');
 
 
 
