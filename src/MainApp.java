@@ -8,16 +8,22 @@ public class MainApp {
 
         Scanner sc = new Scanner(System.in);
 
-        int n = sc.nextInt();
-        int soma = 0;
+        char v;
 
-        for(int i = 0; i < n; i++){
-            int x = sc.nextInt();
-            soma += x;
+        do{
+            System.out.println("Enter the temperature in Celsius:");
+            double c = sc.nextDouble();
 
-        }
+            double f = 9 * c / 5 + 32;
+            System.out.printf("fahrenheit equivalent :%.2f%n", f);
 
-        System.out.println(soma);
+            System.out.print("Do you want to repeat?(y/n)");
+             v = sc.next().charAt(0);
+
+        } while ( v != 'n');
+
+
+
 
         sc.close();
 
