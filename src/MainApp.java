@@ -17,9 +17,6 @@ public class MainApp {
 
 
         sc.close();
-
-
-
     }
     public static int findMAx(int x, int y, int z){
         if (x > y && x > z){
