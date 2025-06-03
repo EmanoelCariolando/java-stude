@@ -1,26 +1,29 @@
 
-import java.util.InputMismatchException;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Locale;
 import java.util.Scanner;
 
 public class MainApp {
     public static void main(String[] args) {
         Locale.setDefault(Locale.US);
-        Scanner sc = new Scanner(System.in);
-
+        File file = new File("C:\\temp\\in.txt");
+        Scanner sc = null;
         try {
-            String[] vect = sc.nextLine().split(" ");
-            int n = sc.nextInt();
-            System.out.println(vect[n]);
+            sc = new Scanner(file);
+            while (sc.hasNextLine()) {
+                System.out.println(sc.nextLine());
+            }
         }
-        catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Invalid index");
+        catch (FileNotFoundException e) {
+           System.out.println("Error opening File: " + e.getMessage());
         }
-        catch (InputMismatchException a){
-            System.out.println("Invalid input");
+        finally {
+            if (sc != null) {
+                sc.close();
+            }
         }
 
-        System.out.println("End of program");
     }
 
 }
