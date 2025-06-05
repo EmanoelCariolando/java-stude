@@ -1,28 +1,26 @@
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.Locale;
 import java.util.Scanner;
 
 public class MainApp {
     public static void main(String[] args) {
         Locale.setDefault(Locale.US);
-        File file = new File("C:\\temp\\in.txt");
-        Scanner sc = null;
-        try {
-            sc = new Scanner(file);
-            while (sc.hasNextLine()) {
-                System.out.println(sc.nextLine());
+        File file = new File("c:\\temp\\in.txt");
+
+        try(BufferedReader br = new BufferedReader(new FileReader(file))){
+            String line = br.readLine();
+            while (line != null){
+                System.out.println(line);
+                line = br.readLine();
             }
+
         }
-        catch (FileNotFoundException e) {
-           System.out.println("Error opening File: " + e.getMessage());
+        catch (IOException e){
+          System.out.println("Error: " + e.getMessage());
         }
-        finally {
-            if (sc != null) {
-                sc.close();
-            }
-        }
+
+
 
     }
 
