@@ -6,24 +6,27 @@ import java.util.Scanner;
 public class MainApp {
     public static void main(String[] args) {
         Locale.setDefault(Locale.US);
+        Scanner sc = new Scanner(System.in);
 
+        System.out.println("Enter a path: ");
+        String strPath = sc.nextLine();
 
-        String[] lines = new String[] {"one", "two", "three", "for", "five"};
-        String file = "c:\\temp\\out.txt";
+        File path = new File(strPath);
 
-
-        try(BufferedWriter bw = new BufferedWriter(new FileWriter(file, true))){ // "true" is used to not recreate the file
-            for (String line : lines) {
-                bw.write(line);
-                bw.newLine();
-            }
+        File[] folders = path.listFiles(File::isDirectory);
+        System.out.println("FOLDERS:");
+        for(File folder : folders){
+            System.out.println(folder.getName());
         }
-        catch (IOException e){
-          e.printStackTrace();
+        System.out.println("FILES:");
+        File[] filers = path.listFiles(File::isFile);
+
+        for(File file : filers){
+            System.out.println(file.getName());
         }
-
-
-
+        boolean success = new File(strPath + "\\sub").mkdir();
+        System.out.println("Directory: "  + " created =" + success);
+        sc.close();
     }
 
 }
