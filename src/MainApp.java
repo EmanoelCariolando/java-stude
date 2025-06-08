@@ -1,32 +1,61 @@
 
 import java.io.*;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
 public class MainApp {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
+
         Locale.setDefault(Locale.US);
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Enter a path: ");
-        String strPath = sc.nextLine();
+        List<Products> list = new ArrayList<>();
 
-        File path = new File(strPath);
+        System.out.println("Enter file path: ");
+        String sourceFileStr = sc.nextLine();
 
-        File[] folders = path.listFiles(File::isDirectory);
-        System.out.println("FOLDERS:");
-        for(File folder : folders){
-            System.out.println(folder.getName());
+        File sourceFile = new File(sourceFileStr);
+        String sourceFolderStr = sourceFile.getParent();
+
+        boolean success = new File(sourceFolderStr + "\\out").mkdir();
+
+        String targetFileStr = sourceFolderStr + "\\out\\summary.csv";
+
+        try (BufferedReader br = new BufferedReader(new FileReader(sourceFileStr))) {
+
+            String itemCsv = br.readLine();
+            while (itemCsv != null) {
+
+                String[] fields = itemCsv.split(",");
+                String name = fields[0];
+                double price = Double.parseDouble(fields[1]);
+                int quantity = Integer.parseInt(fields[2]);
+
+                list.add(new Products(name, price, quantity));
+
+                itemCsv = br.readLine();
+            }
+
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(targetFileStr))) {
+
+                for (Products item : list) {
+                    bw.write(item.getName() + "," + String.format("%.2f", item.getTotalPrice()));
+                    bw.newLine();
+                }
+
+                System.out.println(targetFileStr + " CREATED!");
+
+            } catch (IOException e) {
+                System.out.println("Error writing file: " + e.getMessage());
+            }
+
+        } catch (IOException e) {
+            System.out.println("Error reading file: " + e.getMessage());
         }
-        System.out.println("FILES:");
-        File[] filers = path.listFiles(File::isFile);
 
-        for(File file : filers){
-            System.out.println(file.getName());
-        }
-        boolean success = new File(strPath + "\\sub").mkdir();
-        System.out.println("Directory: "  + " created =" + success);
         sc.close();
     }
-
 }
