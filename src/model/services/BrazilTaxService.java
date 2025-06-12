@@ -1,22 +1,15 @@
 package model.services;
 
-public class BrazilTaxService {
+public class BrazilTaxService implements TaxService {
     public double tax;
+
     public BrazilTaxService() {
     }
     public BrazilTaxService(double tax) {
         this.tax = tax;
     }
 
-    public double getTax(double basicPayment) {
-        return tax;
-    }
-
-    public void setTax(double tax) {
-        this.tax = tax;
-    }
-
-    public double serviceTax(double amount){
+    public double tax(double amount){
       if (amount <= 100.00){
           return amount * 0.2;
       }
