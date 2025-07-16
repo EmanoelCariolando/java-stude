@@ -1,36 +1,30 @@
 package Application;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import model.BrazilInterestService;
+
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.Locale;
+import java.util.Scanner;
 
 
 public class MainApp {
     public static void main(String[] args) throws ParseException {
+        Scanner sc = new Scanner(System.in);
+        Locale.setDefault(Locale.US);
 
-        List<String> list = new ArrayList<>();
-        String path = "C:\\out\\Re.txt";
+        System.out.println("enter the data: ");
+        System.out.print("Amount: ");
+        double amount = sc.nextDouble();
+        System.out.print("months: ");
+        int months = sc.nextInt();
 
-        try(BufferedReader br = new BufferedReader(new FileReader(path))) {
-            String lines = br.readLine();
-            while (lines != null){
-               list.add(lines);
-               lines = br.readLine();
-            }
-            Collections.sort(list);
-            for(String s :list){
-                System.out.println(s);
-            }
 
-        }
+        BrazilInterestService in = new BrazilInterestService(2.0);
+        double payment = in.payment(amount,months);
 
-        catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        System.out.printf("payament after %d months: ", months );
+        System.out.printf(String.format("%.2f",payment));
 
+        sc.close();
     }
     }
