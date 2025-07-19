@@ -1,6 +1,6 @@
 package Application;
 
-import model.BrazilInterestService;
+import model.PrintService;
 
 import java.text.ParseException;
 import java.util.Locale;
@@ -12,18 +12,21 @@ public class MainApp {
         Scanner sc = new Scanner(System.in);
         Locale.setDefault(Locale.US);
 
-        System.out.println("enter the data: ");
-        System.out.print("Amount: ");
-        double amount = sc.nextDouble();
-        System.out.print("months: ");
-        int months = sc.nextInt();
+        PrintService<String> ps = new PrintService<>();
+
+        System.out.print("how many values?: ");
+        int n = sc.nextInt();
+
+        for (int i = 0; i < n; i++){
+           String values = sc.next();
+           ps.addValue(values);
+
+        }
+
+        ps.print();
+        System.out.println("First:" + ps.first());
 
 
-        BrazilInterestService in = new BrazilInterestService(2.0);
-        double payment = in.payment(amount,months);
-
-        System.out.printf("payament after %d months: ", months );
-        System.out.printf(String.format("%.2f",payment));
 
         sc.close();
     }
