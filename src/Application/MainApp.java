@@ -1,8 +1,16 @@
 package Application;
 
-import model.PrintService;
+import entities.Product;
+import model.CalculationService;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.sql.SQLOutput;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -12,22 +20,28 @@ public class MainApp {
         Scanner sc = new Scanner(System.in);
         Locale.setDefault(Locale.US);
 
-        PrintService<String> ps = new PrintService<>();
+        List<Product> list = new ArrayList<>();
 
-        System.out.print("how many values?: ");
-        int n = sc.nextInt();
+        String path = "c:\\out\\Re.txt";
 
-        for (int i = 0; i < n; i++){
-           String values = sc.next();
-           ps.addValue(values);
+        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+
+            String line = br.readLine();
+            while(line != null){
+                String[] fields = line.split(",");
+                list.add(new Product(fields[0],Double.parseDouble(fields[1])));
+                line = br.readLine();
+
+            }
+            Product x = CalculationService.max(list);
+            System.out.print(" Maior numero = ");
+            System.out.print(x);
+
 
         }
+        catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
-        ps.print();
-        System.out.println("First:" + ps.first());
-
-
-
-        sc.close();
     }
     }
