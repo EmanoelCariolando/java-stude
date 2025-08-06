@@ -1,13 +1,8 @@
 package Application;
+import entities.Circle;
+import entities.Retangle;
+import entities.Shape;
 
-import entities.Product;
-import model.CalculationService;
-
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.sql.SQLOutput;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,28 +15,20 @@ public class MainApp {
         Scanner sc = new Scanner(System.in);
         Locale.setDefault(Locale.US);
 
-        List<Product> list = new ArrayList<>();
+        List<Shape> myShapes = new ArrayList<>();
+        myShapes.add(new Circle(2.0));
+        myShapes.add(new Retangle(2.0,3.0));
 
-        String path = "c:\\out\\Re.txt";
+        List<Circle> myCircles = new ArrayList<>();
+        myCircles.add(new Circle(1.0));
 
-        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
-
-            String line = br.readLine();
-            while(line != null){
-                String[] fields = line.split(",");
-                list.add(new Product(fields[0],Double.parseDouble(fields[1])));
-                line = br.readLine();
-
-            }
-            Product x = CalculationService.max(list);
-            System.out.print(" Maior numero = ");
-            System.out.print(x);
-
-
+        System.out.println("total area: " + totalArea(myShapes));
+    }
+    public static double totalArea(List<? extends Shape> l){
+        double sum = 0.0;
+        for (Shape item: l){
+          sum+= item.area();
         }
-        catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
+        return sum;
     }
     }
