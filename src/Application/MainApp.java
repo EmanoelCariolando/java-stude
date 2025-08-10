@@ -3,24 +3,28 @@ package Application;
 import entities.Client;
 
 import java.text.ParseException;
+import java.util.HashSet;
 import java.util.Locale;
 import java.util.Scanner;
+import java.util.Set;
 
 
 public class MainApp {
     public static void main(String[] args) throws ParseException {
         Scanner sc = new Scanner(System.in);
         Locale.setDefault(Locale.US);
-        Client c1 = new Client("Mary","Mamao@gmail.com");
-        Client c2 = new Client("Mary","Mamao@gmail.com");
 
-        System.out.println(c1.equals(c2));
+        Set<String> set = new HashSet<>();
 
-        if (c1.equals(c2)){
-            System.out.println("Já Existe");
+        set.add("TV");
+        set.add("Notebook");
+        set.add("Niga");
+
+        System.out.println(set.contains("Notebook"));
+
+        for (String i: set){
+            System.out.println(i);
         }
-        else {
-            System.out.println("vtmncccc");
-        }
+
     }
     }
