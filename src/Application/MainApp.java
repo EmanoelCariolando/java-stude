@@ -1,12 +1,14 @@
 package Application;
 
-import entities.Client;
+import entities.LogEntry;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.text.ParseException;
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Scanner;
-import java.util.Set;
+import java.time.Instant;
+import java.util.*;
 
 
 public class MainApp {
@@ -14,17 +16,34 @@ public class MainApp {
         Scanner sc = new Scanner(System.in);
         Locale.setDefault(Locale.US);
 
-        Set<String> set = new HashSet<>();
+        System.out.print("type yout path: ");
+        String path = sc.next();
 
-        set.add("TV");
-        set.add("Notebook");
-        set.add("Niga");
+        try(BufferedReader br = new BufferedReader(new FileReader(path))) {
+            Set<LogEntry> listSet = new HashSet<>();
 
-        System.out.println(set.contains("Notebook"));
+            String line = br.readLine();
 
-        for (String i: set){
-            System.out.println(i);
+            while (line != null){
+
+                String[] fields = line.split(" ");
+                String name = fields[0];
+                Date moment = Date.from(Instant.parse((fields[1])));
+
+                listSet.add(new LogEntry(name, moment));
+
+                line = br.readLine();
+            }
+
+            System.out.println("Amount:" + listSet.size());
+
+
+
         }
-
+        catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
     }
