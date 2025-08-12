@@ -1,7 +1,5 @@
 package Application;
 
-import entities.LogEntry;
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -16,34 +14,44 @@ public class MainApp {
         Scanner sc = new Scanner(System.in);
         Locale.setDefault(Locale.US);
 
-        System.out.print("type yout path: ");
-        String path = sc.next();
+        Set<Integer> coursA = new HashSet<>();
+        Set<Integer> coursB = new HashSet<>();
+        Set<Integer> coursC = new HashSet<>();
 
-        try(BufferedReader br = new BufferedReader(new FileReader(path))) {
-            Set<LogEntry> listSet = new HashSet<>();
+        System.out.print("How many students for course A? " );
 
-            String line = br.readLine();
-
-            while (line != null){
-
-                String[] fields = line.split(" ");
-                String name = fields[0];
-                Date moment = Date.from(Instant.parse((fields[1])));
-
-                listSet.add(new LogEntry(name, moment));
-
-                line = br.readLine();
-            }
-
-            System.out.println("Amount:" + listSet.size());
-
-
-
+        int n = sc.nextInt();
+        for (int i =1; i<= n; i++){
+            System.out.println("Type the Id: ");
+            int numbers = sc.nextInt();
+            coursA.add(numbers);
         }
-        catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        System.out.print("How many students for course B? " );
+
+        n = sc.nextInt();
+        for (int i =1; i<= n; i++){
+            System.out.println("Type the Id: ");
+            int numbers = sc.nextInt();
+            coursB.add(numbers);
         }
+
+        System.out.print("How many students for course C? " );
+
+        n = sc.nextInt();
+        for (int i =1; i<= n; i++){
+            System.out.println("Type the Id: ");
+            int numbers = sc.nextInt();
+            coursC.add(numbers);
+        }
+
+        Set<Integer> total = new HashSet<>(coursA);
+        total.addAll(coursB);
+        total.addAll(coursC);
+
+        System.out.println("Total Students: " + total.size());
+
+
+
+
     }
     }
