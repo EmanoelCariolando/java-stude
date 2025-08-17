@@ -1,57 +1,58 @@
 package Application;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
-import java.time.Instant;
 import java.util.*;
 
 
 public class MainApp {
     public static void main(String[] args) throws ParseException {
+
         Scanner sc = new Scanner(System.in);
-        Locale.setDefault(Locale.US);
 
-        Set<Integer> coursA = new HashSet<>();
-        Set<Integer> coursB = new HashSet<>();
-        Set<Integer> coursC = new HashSet<>();
+        Map<String, Integer> votes = new LinkedHashMap<>();
 
-        System.out.print("How many students for course A? " );
+        System.out.print("Enter file full path: ");
+        String path = sc.nextLine();
 
-        int n = sc.nextInt();
-        for (int i =1; i<= n; i++){
-            System.out.println("Type the Id: ");
-            int numbers = sc.nextInt();
-            coursA.add(numbers);
+        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+
+            String line = br.readLine();
+            while (line != null) {
+
+                String[] fields = line.split("\\s*,\\s*");
+
+                if (fields.length < 2) {
+                    System.out.println("Linha inválida: " + line);
+                    line = br.readLine();
+                    continue;
+                }
+
+                String name = fields[0];
+                int count = Integer.parseInt(fields[1]);
+
+                if (votes.containsKey(name)) {
+                    int votesSoFar = votes.get(name);
+                    votes.put(name, count + votesSoFar);
+                }
+                else {
+                    votes.put(name, count);
+                }
+
+                line = br.readLine();
+            }
+
+            for (String key : votes.keySet()) {
+                System.out.println(key + ": " + votes.get(key));
+            }
+
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
         }
-        System.out.print("How many students for course B? " );
 
-        n = sc.nextInt();
-        for (int i =1; i<= n; i++){
-            System.out.println("Type the Id: ");
-            int numbers = sc.nextInt();
-            coursB.add(numbers);
-        }
-
-        System.out.print("How many students for course C? " );
-
-        n = sc.nextInt();
-        for (int i =1; i<= n; i++){
-            System.out.println("Type the Id: ");
-            int numbers = sc.nextInt();
-            coursC.add(numbers);
-        }
-
-        Set<Integer> total = new HashSet<>(coursA);
-        total.addAll(coursB);
-        total.addAll(coursC);
-
-        System.out.println("Total Students: " + total.size());
-
-
-
+        sc.close();
 
     }
     }
