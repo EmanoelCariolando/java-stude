@@ -1,58 +1,64 @@
 package Application;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.text.ParseException;
+import Application.entities.TaskService;
+
+import java.io.*;
 import java.util.*;
 
 
 public class MainApp {
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) throws IOException {
+       Scanner sc = new Scanner(System.in);
+        TaskService taskservice = new TaskService();
 
-        Scanner sc = new Scanner(System.in);
+        int n = 0;
+        String path = "";
+        String choseOption = "Escolha uma Opção: " ;
+        String otherOption = "Digite uma opção válida: ";
 
-        Map<String, Integer> votes = new LinkedHashMap<>();
+        while (n != 4){
+            System.out.println("1 - Adicionar Tarefa");
+            System.out.println("2 - Listar tarefas");
+            System.out.println("3 - Remover tarefa");
+            System.out.println("4 - sair");
 
-        System.out.print("Enter file full path: ");
-        String path = sc.nextLine();
+            System.out.print(choseOption);
+            n = sc.nextInt();
 
-        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+            sc.nextLine();
 
-            String line = br.readLine();
-            while (line != null) {
-
-                String[] fields = line.split("\\s*,\\s*");
-
-                if (fields.length < 2) {
-                    System.out.println("Linha inválida: " + line);
-                    line = br.readLine();
-                    continue;
-                }
-
-                String name = fields[0];
-                int count = Integer.parseInt(fields[1]);
-
-                if (votes.containsKey(name)) {
-                    int votesSoFar = votes.get(name);
-                    votes.put(name, count + votesSoFar);
-                }
-                else {
-                    votes.put(name, count);
-                }
-
-                line = br.readLine();
+            if (n == 1){
+                System.out.print("Digite o caminho do arquivo e o nome do arquivo .txt: ");
+                path = sc.nextLine();
+                System.out.print("digite sua tarefa: ");
+                String task = sc.nextLine();
+                taskservice.addTask(path,task.trim());
             }
-
-            for (String key : votes.keySet()) {
-                System.out.println(key + ": " + votes.get(key));
+            else if (n == 2){
+                System.out.print("Escolha o caminho do seu arquivo: ");
+                path = sc.next();
+                taskservice.seeTasks(path);
             }
-
-        } catch (IOException e) {
-            System.out.println("Error: " + e.getMessage());
+            else if (n == 3){
+                System.out.print("Escolha o arquivo para remover: ");
+                path = sc.next();
+                System.out.println("Digite a task que vc quer remover: ");
+                String taskToRemove = sc.next();
+            }
+            else if(n == 4){
+                System.out.println("Encerrando");
+            }
+            else {
+                System.out.println("Opção Invalida!");
+                choseOption = otherOption;
+            }
         }
 
-        sc.close();
 
-    }
+
+
+
+
+
+         }
     }
